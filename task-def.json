@@ -1,0 +1,82 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "kwc-fastapi-container",
+            "image": "629246126873.dkr.ecr.ap-northeast-2.amazonaws.com/korean-writing-chatbot@sha256:9547f4b9722aed24de5de04bb47a7466e85cc126180d3df8bc825ce55de33ed2",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp",
+                    "name": "kwc-fastapi-container-8000-tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "AWS_REGION",
+                    "value": "ap-northeast-2"
+                },
+                {
+                    "name": "ENVIRONMENT",
+                    "value": "production"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "FT_EVAL_MODEL_ID",
+                    "valueFrom": "arn:aws:ssm:ap-northeast-2:629246126873:parameter/kwc/ft-eval-model-id"
+                },
+                {
+                    "name": "LANGSMITH_API_KEY",
+                    "valueFrom": "arn:aws:ssm:ap-northeast-2:629246126873:parameter/kwc/langsmith-api-key"
+                },
+                {
+                    "name": "OPENAI_API_KEY",
+                    "valueFrom": "arn:aws:ssm:ap-northeast-2:629246126873:parameter/kwc/openai-api-key"
+                },
+                {
+                    "name": "SECRET_KEY",
+                    "valueFrom": "arn:aws:ssm:ap-northeast-2:629246126873:parameter/kwc/secret-key"
+                },
+                {
+                    "name": "TAVILY_API_KEY",
+                    "valueFrom": "arn:aws:ssm:ap-northeast-2:629246126873:parameter/kwc/tavily-api-key"
+                }
+            ],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/kwc-fastapi-task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "kwc-fastapi-task",
+    "taskRoleArn": "arn:aws:iam::629246126873:role/ecsTaskRole",
+    "executionRoleArn": "arn:aws:iam::629246126873:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "enableFaultInjection": false
+}

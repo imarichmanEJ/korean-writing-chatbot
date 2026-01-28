@@ -1,0 +1,36 @@
+services:
+  # DynamoDB Local 서비스
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    # volumes:
+    #   - dynamodb-data:/home/dynamodblocal/data
+    # command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data"
+    networks:
+      - app-network
+
+  # FastAPI 서비스
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    ports:
+      - "8001:8000"
+    env_file:
+      - credential/.env.docker
+    depends_on:
+      - dynamodb-local
+    networks:
+      - app-network
+
+# 볼륨 정의 (데이터 영속성)
+volumes:
+  dynamodb-data:
+
+# 네트워크 정의 (컨테이너 간 통신)
+networks:
+  app-network:
+    driver: bridge

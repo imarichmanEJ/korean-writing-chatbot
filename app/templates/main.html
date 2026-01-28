@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+    <!--메인 화면-->
+    <div class="main-page" id="mainPage">
+
+        <!-- 사용자 아이콘(로그아웃) -->
+        <div class="user-menu">
+            <button type="button" class="user-icon-btn" id="userIconBtn">👤</button>
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-info">
+                    <div class="user-name" id="displayUsername"></div>
+                </div>
+                <button type="button" class="logout-btn" id="logoutBtn">Sign Out</button>
+            </div>
+        </div>
+
+        <!-- 사이드바 (채팅 세션 목록)-->
+        <div class="sidebar-container" id="sidebarContainer">
+            <div class="sidebar-header">
+                <div class="header-top">
+                    <h1 class="app-title">Korean Writing</h1>
+                    <button type="button" class="toggle-btn" id="toggleBtn">
+                        <div class="toggle-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+                <button type="button" class="new-chat-btn" id="newChatBtn">New Chat</button>
+            </div>
+            <div class="session-list" id="sessionList"></div>
+        </div>
+
+        <!--채팅 화면(문제 + 채팅)-->
+        <div class="chat-container" id="chatContainer">
+            <!--문제 패널-->
+            <div class="writing-panel hidden" id="writingPanel">       
+                <!-- 문제 영역 -->
+                <div class="problem-area" id="problemArea">    
+                    <!-- 논설문 문제 -->
+                    <div class="essay-problem hidden" id="essayProblem">
+                        <div class="essay-problem-header">
+                            [54] 다음을 주제로 하여 자신의 생각을 600~700자로 글을 쓰십시오.
+                        </div>
+                        <div class="essay-problem-content" id="essayQuestion"></div>
+                        <div class="essay-answer-section">
+                            <div class="essay-answer-header">Answer</div>
+                            <textarea 
+                                class="essay-answer-textarea" 
+                                id="essayAnswerText" 
+                                placeholder="이곳에 답안을 작성하세요. 작성 후 'Submit' 버튼을 클릭하세요..."
+                                maxlength="700">
+                            </textarea>
+                            <div class="char-count">
+                                <span id="charCount">0</span> / 700자
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 빈칸 채우기 문제 -->
+                    <div class="blank-problem hidden" id="blankProblem">
+                        <div class="blank-problem-header">
+                            ※ [51~52] 다음 글의 ㉠과 ㉡에 알맞은 말을 각각 쓰시오.
+                        </div>
+                        <!-- 문제 본문 (이미지 또는 텍스트) -->
+                        <div class="blank-problem-body" id="blankProblemBody">
+                            <img src="" alt="">
+                            <div id="blank_stakeholder" class="{{ blank_type_data|lower }}"></div>
+                            <div id="blank_subject" class="{{ blank_type_data|lower }}"></div>
+                            <div id="blank_body" class="{{ blank_type_data|lower }}"></div>
+                            <div id="blank_p1" class="{{ blank_type_data|lower }}"></div>
+                            <div id="blank_p2" class="{{ blank_type_data|lower }}"></div>
+                        </div>
+                        <!-- 답안 입력 -->
+                        <div class="blank-answer-section">
+                            <div class="blank-input-row">
+                                <label for="blank1">㉠</label>
+                                <input type="text" id="blank1" placeholder="입력하세요" />
+                            </div>
+                            <div class="blank-input-row">
+                                <label for="blank2">㉡</label>
+                                <input type="text" id="blank2" placeholder="입력하세요" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 하단 버튼 영역 -->
+                <div class="writing-actions">
+                    <div class="action-buttons">
+                        <button type="button" class="btn-submit" id="submitBtn">Submit</button>
+                        <button type="button" class="btn-end" id="endBtn">End</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--채팅 패널-->
+            <div class="chat-panel" id="chatPanel">
+                <div class="chat-area" id="chatArea"></div>
+                <div class="suggestion-bubbles" id="suggestionBubbles">
+                    <div class="suggestion-bubble" data-text="사용방법 알고 싶어요.">사용방법 알고 싶어요.</div>
+                    <div class="suggestion-bubble" data-text="논설문 쓰기 연습할래요.">논설문 쓰기 연습할래요.</div>
+                    <div class="suggestion-bubble" data-text="빈칸채우기 연습 할래요.">빈칸채우기 연습 할래요.</div>
+                </div>
+                <div class="input-wrapper">
+                    <textarea class="chat-input" id="chatInput" placeholder="Type your message here"></textarea>
+                    <button type="button" class="send-btn" id="sendBtn">➤</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
