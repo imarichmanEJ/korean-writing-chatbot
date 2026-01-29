@@ -36,7 +36,7 @@ AI-powered writing tutor providing:
 
 **AI Workflow**:
 - Supervisor agent routes user intent to specialized sub-agents
-- Parallel execution: Task generation / Evaluation / Feedback Summarization / Q&A
+- Parallel execution: Question generation / Evaluation / Feedback Summarization / Q&A
 - State management preserves conversation context (up to 50 turns)
 
 ![LangGraph Workflow](docs/langgraph-diagram.png)
@@ -87,11 +87,15 @@ AI-powered writing tutor providing:
 - Analyzed 1,000 sampled essays to identify score-band-specific writing features
 - Redesigned LLM evaluation rubrics achieving QWK 0.7
 
+**CO-STAR Prompt Engineering:** 
+- Structured prompts with Context, Objective, Style, Tone, Audience, Response format
+- Enforced Markdown/JSON schema for 93% output format compliance across all agents
+
 **Prompt-Based Scoring Control:**
 - Built rubric-driven evaluation prompt with structured scoring steps
 - Implemented penalty-based rules to mitigate LLM over-scoring tendencies
 
-**Exam-Style Task Generation:**
+**Exam-Style Question Generation:**
 - Decomposed exam-style questions into explicit generation stages
 - Leveraged Few-shot CoT and CO-STAR prompting techniques
 - Validated by domain experts confirming high similarity to real exam items
