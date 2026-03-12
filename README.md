@@ -39,7 +39,11 @@ AI-powered writing tutor providing:
 - Parallel execution: Question generation / Evaluation / Feedback Summarization / Q&A
 - State management preserves conversation context (up to 50 turns)
 
-![LangGraph Workflow](docs/langgraph-diagram.png)
+![LangGraph Workflow](docs/langgraph-diagram.png)  
+
+**System Architecture:**
+
+<img src="docs/system_structure.png" width="700"/>
 
 
 **Infrastructure Highlights**:
